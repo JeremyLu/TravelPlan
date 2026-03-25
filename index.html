@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TravelPlan - 我的旅行计划</title>
+  <title>Jeremy 的青岛之旅 - 2026.4.1~4.4</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
@@ -17,25 +17,19 @@
       --sand-cream: #f9f8f4;
     }
 
-    * {
-      font-family: 'Noto Sans SC', sans-serif;
-    }
+    * { font-family: 'Noto Sans SC', sans-serif; }
 
     body {
       background: var(--sand-cream);
       overflow-x: hidden;
     }
 
-    .font-display {
-      font-family: 'Playfair Display', serif;
-    }
+    .font-display { font-family: 'Playfair Display', serif; }
 
-    /* 全屏 hero */
     .hero {
       min-height: 100vh;
-      background:
-        linear-gradient(135deg, rgba(15,76,117,0.92) 0%, rgba(50,130,184,0.85) 100%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='900'%3E%3Cdefs%3E%3Cpattern id='p' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='40' cy='40' r='1.5' fill='rgba(255,255,255,0.08)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E");
+      background: linear-gradient(135deg, rgba(15,76,117,0.93) 0%, rgba(50,130,184,0.88) 100%),
+                  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='900'%3E%3Cdefs%3E%3Cpattern id='p' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E");
       background-size: cover;
       display: flex;
       align-items: center;
@@ -46,16 +40,13 @@
     .hero::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 180px;
+      bottom: 0; left: 0; right: 0;
+      height: 160px;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f9f8f4' fill-opacity='1' d='M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,154.7C840,149,960,171,1080,176C1200,181,1320,171,1380,165.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
       background-size: cover;
       background-repeat: no-repeat;
     }
 
-    /* 渐变文字 */
     .gradient-text {
       background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-mid) 100%);
       -webkit-background-clip: text;
@@ -63,7 +54,6 @@
       background-clip: text;
     }
 
-    /* 玻璃卡片 */
     .glass-card {
       background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(12px);
@@ -73,14 +63,12 @@
     }
 
     .glass-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
-      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.13);
     }
 
-    /* 目的地卡片图片区 */
     .card-image {
-      height: 220px;
+      height: 240px;
       position: relative;
       overflow: hidden;
     }
@@ -89,10 +77,9 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.35) 100%);
+      background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.4) 100%);
     }
 
-    /* 标签样式 */
     .tag {
       display: inline-flex;
       align-items: center;
@@ -103,7 +90,6 @@
       font-weight: 500;
     }
 
-    /* 动画 */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -114,29 +100,41 @@
       50% { transform: translateY(-10px); }
     }
 
-    .animate-fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
-    }
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-float { animation: float 6s ease-in-out infinite; }
 
-    .animate-delay-1 { animation-delay: 0.15s; opacity: 0; }
-    .animate-delay-2 { animation-delay: 0.3s; opacity: 0; }
-    .animate-delay-3 { animation-delay: 0.45s; opacity: 0; }
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    /* 自定义滚动条 */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #f1f1f1; }
-    ::-webkit-scrollbar-thumb { background: var(--ocean-mid); border-radius: 4px; }
-
-    /* 统计数字 */
     .stat-number {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 700;
       line-height: 1;
     }
+
+    /* 行程时间轴 */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--ocean-deep), var(--amber-gold));
+      border-radius: 1px;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -0.15rem;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: var(--ocean-mid); border-radius: 4px; }
   </style>
 </head>
 <body>
@@ -149,183 +147,160 @@
           <i data-lucide="compass" class="w-4 h-4"></i>
           <span>TravelPlan</span>
         </div>
-        <h1 class="font-display text-6xl md:text-8xl font-bold text-white mb-6 tracking-tight">
-          Explore <span class="text-[#ff9f1c]">The</span> World
+        <h1 class="font-display text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
+          Jeremy's <span class="text-[#ff9f1c]">Travel</span> Plans
         </h1>
-        <p class="text-white/80 text-xl md:text-2xl max-w-xl mx-auto mb-4 font-light leading-relaxed">
+        <p class="text-white/80 text-xl md:text-2xl max-w-xl mx-auto mb-4 font-light">
           用心记录每一段旅程
         </p>
         <p class="text-white/50 text-base max-w-lg mx-auto mb-12 font-light">
-          精心策划的旅行攻略，从城市漫步到美食探索，让每一次出发都值得期待
+          为 Jeremy 量身定制的旅行攻略，让每一次出发都值得期待
         </p>
-        <a href="#destinations"
-           class="inline-flex items-center gap-3 bg-[#ff9f1c] hover:bg-[#f3920a] text-white px-10 py-4 rounded-full font-medium transition-all hover:scale-105 shadow-xl hover:shadow-2xl text-lg">
-          <span>浏览目的地</span>
+        <a href="#plans" class="inline-flex items-center gap-3 bg-[#ff9f1c] hover:bg-[#f3920a] text-white px-10 py-4 rounded-full font-medium transition-all hover:scale-105 shadow-xl hover:shadow-2xl text-lg">
+          <span>查看行程</span>
           <i data-lucide="arrow-down" class="w-5 h-5"></i>
         </a>
       </div>
 
-      <!-- 装饰元素 -->
-      <div class="absolute -right-20 top-1/4 opacity-10 hidden lg:block animate-float">
-        <i data-lucide="plane" class="w-48 h-48 text-white" style="transform: rotate(-15deg)"></i>
+      <div class="absolute -right-16 top-1/4 opacity-[0.06] hidden lg:block animate-float">
+        <i data-lucide="plane" class="w-40 h-40 text-white" style="transform: rotate(-15deg)"></i>
       </div>
-      <div class="absolute -left-16 bottom-1/3 opacity-10 hidden lg:block animate-float" style="animation-delay: 2s">
-        <i data-lucide="map" class="w-40 h-40 text-white"></i>
+      <div class="absolute -left-12 bottom-1/3 opacity-[0.06] hidden lg:block animate-float" style="animation-delay: 2s">
+        <i data-lucide="map" class="w-32 h-32 text-white"></i>
       </div>
     </div>
   </section>
 
-  <!-- 统计栏 -->
+  <!-- 旅行概览 -->
   <section class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
       <div class="glass-card rounded-3xl p-8 md:p-12">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div class="stat-number gradient-text">1</div>
-            <p class="text-gray-500 mt-2 font-medium">目的地</p>
-          </div>
-          <div>
-            <div class="stat-number gradient-text">3</div>
-            <p class="text-gray-500 mt-2 font-medium">天行程</p>
-          </div>
-          <div>
-            <div class="stat-number gradient-text">4</div>
-            <p class="text-gray-500 mt-2 font-medium">美食推荐</p>
-          </div>
-          <div>
-            <div class="stat-number gradient-text">15+</div>
-            <p class="text-gray-500 mt-2 font-medium">打卡景点</p>
-          </div>
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold gradient-text mb-2">旅行日历</h2>
+          <p class="text-gray-500">Jeremy 的旅行足迹</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- 青岛卡片 -->
+          <a href="qingdao-travel-guide.html" class="block group col-span-1 md:col-span-3">
+            <div class="glass-card rounded-2xl overflow-hidden" style="background: rgba(255,255,255,0.85);">
+              <div class="md:flex">
+                <div class="card-image md:w-2/5 bg-gradient-to-br from-[#0f4c75] via-[#3282b8] to-[#bbe1fa] flex items-center justify-center relative">
+                  <div class="absolute inset-0 flex items-center justify-center opacity-[0.06]">
+                    <i data-lucide="waves" class="w-48 h-48 text-white"></i>
+                  </div>
+                  <div class="relative z-10 text-center text-white px-6">
+                    <div class="text-7xl mb-3">🏖️</div>
+                    <h3 class="font-display text-4xl font-bold">青岛</h3>
+                    <p class="text-white/60 mt-1 text-sm">Qingdao, China</p>
+                  </div>
+                </div>
+                <div class="md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                  <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="tag bg-[#ff9f1c]/15 text-[#d68910]">
+                      <i data-lucide="calendar" class="w-3 h-3"></i>
+                      2026.4.1 - 4.4
+                    </span>
+                    <span class="tag bg-[#0f4c75]/10 text-[#0f4c75]">
+                      <i data-lucide="users" class="w-3 h-3"></i>
+                      家庭 + 朋友
+                    </span>
+                    <span class="tag bg-green-100 text-green-700">
+                      <i data-lucide="clock" class="w-3 h-3"></i>
+                      即将出发
+                    </span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-[#0f4c75] mb-2">青岛四日亲子游</h3>
+                  <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                    金沙滩希尔顿 → 香格里拉，带妻子和孩子，与朋友们一起探索海滨之城。栈桥、八大关、崂山、极地海洋世界……
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1 text-xs bg-gray-100 rounded-lg px-2.5 py-1 text-gray-600">
+                      🏨 金沙滩希尔顿
+                    </span>
+                    <span class="inline-flex items-center gap-1 text-xs bg-gray-100 rounded-lg px-2.5 py-1 text-gray-600">
+                      🏨 香格里拉
+                    </span>
+                    <span class="inline-flex items-center gap-1 text-xs bg-gray-100 rounded-lg px-2.5 py-1 text-gray-600">
+                      🚄 4日晚火车返程
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[#0f4c75] font-medium text-sm group-hover:gap-4 transition-all">
+                    <span>查看完整攻略</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- 更多占位 -->
+        <div class="mt-6 border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-[#3282b8] transition-colors">
+          <i data-lucide="plus-circle" class="w-10 h-10 text-gray-400 mx-auto mb-3"></i>
+          <p class="text-gray-400 text-sm font-medium">下一个目的地，正在计划中...</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 目的地列表 -->
-  <section id="destinations" class="py-16 px-4">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-14">
-        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">目的地</h2>
-        <p class="text-gray-500 text-lg">选择一个目的地，开始你的旅程</p>
-      </div>
-
-      <!-- 青岛卡片 -->
-      <a href="qingdao-travel-guide.html" class="block max-w-4xl mx-auto group">
-        <div class="glass-card rounded-3xl overflow-hidden">
-          <div class="md:flex">
-            <!-- 图片区域 -->
-            <div class="card-image md:w-1/2 bg-gradient-to-br from-[#0f4c75] via-[#3282b8] to-[#bbe1fa] flex items-center justify-center relative">
-              <div class="absolute inset-0 flex items-center justify-center opacity-10">
-                <i data-lucide="waves" class="w-64 h-64 text-white"></i>
-              </div>
-              <div class="relative z-10 text-center text-white px-6">
-                <div class="text-8xl mb-4">🏖️</div>
-                <h3 class="font-display text-5xl font-bold">青岛</h3>
-                <p class="text-white/70 mt-2 text-lg">Qingdao, China</p>
-              </div>
-            </div>
-
-            <!-- 信息区域 -->
-            <div class="md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
-              <div class="flex items-center gap-2 mb-4">
-                <span class="tag bg-[#0f4c75]/10 text-[#0f4c75]">
-                  <i data-lucide="map-pin" class="w-3 h-3"></i>
-                  山东
-                </span>
-                <span class="tag bg-[#ff9f1c]/10 text-[#d68910]">
-                  <i data-lucide="calendar" class="w-3 h-3"></i>
-                  3天
-                </span>
-                <span class="tag bg-[#3282b8]/10 text-[#3282b8]">
-                  <i data-lucide="sun" class="w-3 h-3"></i>
-                  5-10月
-                </span>
-              </div>
-
-              <h3 class="text-2xl md:text-3xl font-bold text-[#0f4c75] mb-3">
-                探索海滨之城的四季之美
-              </h3>
-              <p class="text-gray-600 leading-relaxed mb-6">
-                红瓦绿树，碧海蓝天。德式建筑与东方神韵的完美交融，从栈桥到八大关，从啤酒博物馆到海鲜大排档，3天带你深度体验青岛的魅力。
-              </p>
-
-              <div class="grid grid-cols-3 gap-3 mb-6">
-                <div class="bg-[#f0f7ff] rounded-xl p-3 text-center">
-                  <p class="text-2xl">📸</p>
-                  <p class="text-xs text-gray-500 mt-1">八大关</p>
-                </div>
-                <div class="bg-[#fff8ee] rounded-xl p-3 text-center">
-                  <p class="text-2xl">🍺</p>
-                  <p class="text-xs text-gray-500 mt-1">啤酒博物馆</p>
-                </div>
-                <div class="bg-[#f0f7ff] rounded-xl p-3 text-center">
-                  <p class="text-2xl">🦀</p>
-                  <p class="text-xs text-gray-500 mt-1">海鲜美食</p>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-2 text-[#0f4c75] font-medium group-hover:gap-4 transition-all">
-                <span>查看完整攻略</span>
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-              </div>
-            </div>
-          </div>
+  <!-- Jeremy 简介 -->
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="glass-card rounded-3xl p-10">
+        <div class="w-20 h-20 bg-gradient-to-br from-[#0f4c75] to-[#3282b8] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+          <span class="text-3xl font-bold text-white">J</span>
         </div>
-      </a>
-
-      <!-- 更多目的地占位 -->
-      <div class="mt-8 max-w-4xl mx-auto">
-        <div class="border-2 border-dashed border-gray-300 rounded-3xl p-12 text-center hover:border-[#3282b8] transition-colors cursor-default">
-          <i data-lucide="plus-circle" class="w-12 h-12 text-gray-400 mx-auto mb-4"></i>
-          <p class="text-gray-400 text-lg font-medium">更多目的地，敬请期待...</p>
-          <p class="text-gray-300 text-sm mt-2">下一个目的地会是哪里？</p>
+        <h3 class="text-2xl font-bold text-[#0f4c75] mb-3">Jeremy's Travel Plan</h3>
+        <p class="text-gray-600 leading-relaxed max-w-lg mx-auto">
+          每一段旅程都值得被认真对待。<br>
+          这里是 Jeremy 的旅行计划手册，<br>
+          记录目的地、行程、美食与回忆。
+        </p>
+        <div class="flex justify-center gap-3 mt-6">
+          <span class="inline-flex items-center gap-1.5 text-sm bg-[#0f4c75]/5 text-[#0f4c75] px-4 py-2 rounded-full">
+            <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+            家庭旅行
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-sm bg-[#ff9f1c]/10 text-[#d68910] px-4 py-2 rounded-full">
+            <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
+            美食探索
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-sm bg-[#3282b8]/10 text-[#3282b8] px-4 py-2 rounded-full">
+            <i data-lucide="camera" class="w-3.5 h-3.5"></i>
+            记录美好
+          </span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 页脚 -->
-  <footer class="py-12 px-4 bg-gradient-to-t from-[#e8f4f8] to-transparent mt-16">
+  <footer class="py-12 px-4 bg-gradient-to-t from-[#e8f4f8] to-transparent">
     <div class="max-w-6xl mx-auto text-center">
       <div class="flex items-center justify-center gap-3 mb-4">
-        <i data-lucide="compass" class="w-7 h-7 text-[#0f4c75]"></i>
-        <span class="text-xl font-bold gradient-text">TravelPlan</span>
+        <i data-lucide="compass" class="w-6 h-6 text-[#0f4c75]"></i>
+        <span class="text-lg font-bold gradient-text">Jeremy's Travel Plan</span>
       </div>
-      <p class="text-gray-400 text-sm mb-6">用心记录每一段旅程</p>
+      <p class="text-gray-400 text-sm mb-4">用心记录每一段旅程</p>
       <div class="flex justify-center gap-6 text-gray-400 text-sm">
-        <a href="#" class="hover:text-[#0f4c75] transition-colors">关于</a>
         <a href="https://github.com/JeremyLu/TravelPlan" target="_blank" class="hover:text-[#0f4c75] transition-colors flex items-center gap-1">
           <i data-lucide="github" class="w-4 h-4"></i>
           GitHub
         </a>
       </div>
-      <p class="text-gray-300 text-xs mt-6">© 2024 TravelPlan</p>
+      <p class="text-gray-300 text-xs mt-6">© 2026 Jeremy's Travel Plan</p>
     </div>
   </footer>
 
   <script>
     lucide.createIcons();
-
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
-
-    // 滚动显示动画
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.glass-card').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
