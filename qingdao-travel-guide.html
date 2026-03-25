@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>青岛旅游攻略 - 探索海滨之城的四季之美</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Playfair+Display:wght@700&display=swap');
+
+    :root {
+      --ocean-deep: #0f4c75;
+      --ocean-mid: #3282b8;
+      --ocean-light: #bbe1fa;
+      --amber-gold: #ff9f1c;
+      --sand-cream: #f9f8f4;
+      --text-dark: #1b262c;
+      --text-light: #6b7a8f;
+    }
+
+    * {
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f9f8f4 0%, #e8f4f8 100%);
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* 海洋波浪效果 */
+    .wave-bg {
+      background: linear-gradient(180deg, var(--ocean-deep) 0%, var(--ocean-mid) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wave-bg::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f9f8f4' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: bottom;
+    }
+
+    /* 玻璃态效果 */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 卡片悬浮动画 */
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 时间轴动画 */
+    .timeline-item {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--ocean-deep) 0%, var(--ocean-light) 100%);
+      border-radius: 2px;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 8px;
+      width: 13px;
+      height: 13px;
+      background: var(--amber-gold);
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 渐变文字 */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-mid) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* 滚动动画 */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* 导航栏 */
+    .nav-blur {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* 自定义滚动条 */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--ocean-mid);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--ocean-deep);
+    }
+
+    /* 章节过渡 */
+    section {
+      scroll-margin-top: 80px;
+    }
+
+    /* 图片容器 */
+    .img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .img-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+    }
+  </style>
+</head>
+<body x-data="{ currentSection: 'cover' }" class="min-h-screen">
+  <!-- 导航栏 -->
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-2">
+          <i data-lucide="waves" class="w-8 h-8 text-[#0f4c75]"></i>
+          <span class="text-xl font-bold gradient-text">青岛旅游攻略</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#cover" class="text-gray-600 hover:text-[#0f4c75] transition-colors font-medium">首页</a>
+          <a href="#day1" class="text-gray-600 hover:text-[#0f4c75] transition-colors font-medium">第一天</a>
+          <a href="#day2" class="text-gray-600 hover:text-[#0f4c75] transition-colors font-medium">第二天</a>
+          <a href="#day3" class="text-gray-600 hover:text-[#0f4c75] transition-colors font-medium">第三天</a>
+          <a href="#food" class="text-gray-600 hover:text-[#0f4c75] transition-colors font-medium">美食</a>
+          <a href="#tips" class="text-gray-600 hover:text-[#0f4c75] transition-colors font-medium">贴士</a>
+        </div>
+        <button @click="window.scrollTo({top:0, behavior:'smooth'})" class="md:hidden p-2">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 封面 Hero Section -->
+  <section id="cover" class="wave-bg min-h-screen flex items-center justify-center relative">
+    <div class="absolute inset-0 flex items-center justify-center opacity-5">
+      <i data-lucide="anchor" class="w-[600px] h-[600px] text-white"></i>
+    </div>
+    <div class="relative z-10 text-center px-4 animate-fade-in-up">
+      <div class="mb-8">
+        <h1 class="font-display text-7xl md:text-9xl font-bold text-white mb-4 tracking-tight">
+          青岛
+        </h1>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <div class="w-20 h-1 bg-[#ff9f1c] rounded-full"></div>
+          <span class="text-white/90 text-xl md:text-2xl font-light tracking-widest">
+            探索海滨之城的四季之美
+          </span>
+          <div class="w-20 h-1 bg-[#ff9f1c] rounded-full"></div>
+        </div>
+      </div>
+      <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+        红瓦绿树，碧海蓝天<br>
+        德式建筑与东方神韵的完美交融
+      </p>
+      <a href="#day1" class="inline-flex items-center gap-2 bg-[#ff9f1c] hover:bg-[#f3920a] text-white px-8 py-4 rounded-full font-medium transition-all hover:scale-105 shadow-lg hover:shadow-xl">
+        <span>开始探索</span>
+        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+      </a>
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <i data-lucide="chevron-down" class="w-8 h-8 text-white/60"></i>
+    </div>
+  </section>
+
+  <!-- 第一天 -->
+  <section id="day1" class="py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-4 mb-12">
+        <div class="w-16 h-16 bg-[#0f4c75] rounded-2xl flex items-center justify-center shadow-lg">
+          <span class="text-3xl font-bold text-white">01</span>
+        </div>
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-2">城市初探</h2>
+          <p class="text-gray-600 text-lg">感受历史与现代的交汇</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <!-- 时间轴行程 -->
+        <div class="glass-card rounded-3xl p-8 card-hover">
+          <h3 class="text-2xl font-bold text-[#0f4c75] mb-8 flex items-center gap-3">
+            <i data-lucide="clock" class="w-6 h-6"></i>
+            行程安排
+          </h3>
+          
+          <div class="space-y-8">
+            <div class="timeline-item">
+              <div class="flex items-start justify-between mb-2">
+                <span class="text-[#ff9f1c] font-bold text-lg">09:00 - 11:00</span>
+                <span class="text-xs bg-[#0f4c75] text-white px-3 py-1 rounded-full">上午</span>
+              </div>
+              <h4 class="text-xl font-bold text-[#0f4c75] mb-2">栈桥</h4>
+              <p class="text-gray-600 leading-relaxed">
+                青岛标志性建筑，可欣赏海景并喂食海鸥。漫步在延伸至大海的栈桥上，感受历史与现代的交汇。
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <div class="flex items-start justify-between mb-2">
+                <span class="text-[#ff9f1c] font-bold text-lg">11:30 - 13:30</span>
+                <span class="text-xs bg-[#ff9f1c] text-white px-3 py-1 rounded-full">中午</span>
+              </div>
+              <h4 class="text-xl font-bold text-[#0f4c75] mb-2">八大关</h4>
+              <p class="text-gray-600 leading-relaxed">
+                德式建筑群，红瓦绿树，碧海蓝天。是拍照打卡的绝佳地点，每条街道都有独特的欧洲风情。
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <div class="flex items-start justify-between mb-2">
+                <span class="text-[#ff9f1c] font-bold text-lg">14:30 - 16:30</span>
+                <span class="text-xs bg-[#0f4c75] text-white px-3 py-1 rounded-full">下午</span>
+              </div>
+              <h4 class="text-xl font-bold text-[#0f4c75] mb-2">五四广场</h4>
+              <p class="text-gray-600 leading-relaxed">
+                城市中心广场，有巨大的红色雕塑。夜晚灯光璀璨，是观赏城市夜景的最佳地点。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 今日亮点 -->
+        <div class="glass-card rounded-3xl p-8 card-hover">
+          <h3 class="text-2xl font-bold text-[#0f4c75] mb-8 flex items-center gap-3">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+            今日亮点
+          </h3>
+          
+          <div class="space-y-6">
+            <div class="bg-gradient-to-r from-[#0f4c75] to-[#3282b8] rounded-2xl p-6 text-white card-hover cursor-pointer">
+              <div class="flex items-center gap-4 mb-3">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                  <span class="text-2xl">📸</span>
+                </div>
+                <span class="font-bold text-lg">八大关德式建筑群</span>
+              </div>
+              <p class="text-white/80 text-sm">漫步欧洲风情街道，感受异域魅力</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-[#3282b8] to-[#bbe1fa] rounded-2xl p-6 text-white card-hover cursor-pointer">
+              <div class="flex items-center gap-4 mb-3">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                  <span class="text-2xl">🌊</span>
+                </div>
+                <span class="font-bold text-lg">栈桥观海鸥</span>
+              </div>
+              <p class="text-white/80 text-sm">与海鸥共舞，体验海洋的浪漫</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-[#ff9f1c] to-[#ffb74d] rounded-2xl p-6 text-white card-hover cursor-pointer">
+              <div class="flex items-center gap-4 mb-3">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                  <span class="text-2xl">🏙️</span>
+                </div>
+                <span class="font-bold text-lg">五四广场夜景</span>
+              </div>
+              <p class="text-white/80 text-sm">璀璨夜景，感受城市脉搏</p>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <div class="flex items-center justify-between text-sm text-gray-600">
+              <div class="flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                <span>全程约 15 公里</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="clock" class="w-4 h-4"></i>
+                <span>建议 7 小时</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第二天 -->
+  <section id="day2" class="py-24 px-4 bg-gradient-to-b from-white to-[#e8f4f8]">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-4 mb-12">
+        <div class="w-16 h-16 bg-[#3282b8] rounded-2xl flex items-center justify-center shadow-lg">
+          <span class="text-3xl font-bold text-white">02</span>
+        </div>
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-2">海滨漫步</h2>
+          <p class="text-gray-600 text-lg">悠闲的海岸线漫步，享受海风与阳光</p>
+        </div>
+      </div>
+
+      <!-- 地点卡片网格 -->
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="glass-card rounded-3xl p-6 card-hover">
+          <div class="w-14 h-14 bg-[#0f4c75] rounded-2xl flex items-center justify-center mb-4">
+            <i data-lucide="map" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="text-2xl font-bold text-[#0f4c75] mb-3">小青岛公园</h4>
+          <div class="flex items-center gap-2 text-[#ff9f1c] font-medium mb-3">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>09:00 - 11:00</span>
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            形似一把古琴，有白色的灯塔和美丽的海景。可俯瞰整个青岛湾。
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 card-hover">
+          <div class="w-14 h-14 bg-[#3282b8] rounded-2xl flex items-center justify-center mb-4">
+            <i data-lucide="tree-pine" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="text-2xl font-bold text-[#0f4c75] mb-3">鲁迅公园</h4>
+          <div class="flex items-center gap-2 text-[#ff9f1c] font-medium mb-3">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>11:30 - 13:00</span>
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            依山傍海，是青岛最美的海滨公园之一。有独特的礁石和海浪景观。
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 card-hover">
+          <div class="w-14 h-14 bg-[#ff9f1c] rounded-2xl flex items-center justify-center mb-4">
+            <i data-lucide="umbrella" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="text-2xl font-bold text-[#0f4c75] mb-3">第一海水浴场</h4>
+          <div class="flex items-center gap-2 text-[#ff9f1c] font-medium mb-3">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+            <span>14:00 - 17:00</span>
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            青岛最著名的海滩，可游泳、晒太阳、玩沙子。夏季人气旺盛。
+          </p>
+        </div>
+      </div>
+
+      <!-- 主题卡片 -->
+      <div class="bg-gradient-to-r from-[#0f4c75] to-[#3282b8] rounded-3xl p-8 text-white text-center card-hover">
+        <div class="flex items-center justify-center gap-4 mb-4">
+          <i data-lucide="compass" class="w-10 h-10"></i>
+          <h3 class="text-3xl font-bold">今日主题</h3>
+        </div>
+        <p class="text-xl text-white/90">悠闲的海岸线漫步，享受海风与阳光</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第三天 -->
+  <section id="day3" class="py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-4 mb-12">
+        <div class="w-16 h-16 bg-[#ff9f1c] rounded-2xl flex items-center justify-center shadow-lg">
+          <span class="text-3xl font-bold text-white">03</span>
+        </div>
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-2">啤酒文化之旅</h2>
+          <p class="text-gray-600 text-lg">感受百年酿造工艺的魅力</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- 左侧活动 -->
+        <div class="md:col-span-2 space-y-6">
+          <div class="glass-card rounded-3xl p-8 card-hover border-l-4 border-[#0f4c75]">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-16 h-16 bg-[#0f4c75] rounded-2xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="beer" class="w-8 h-8 text-white"></i>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="text-[#ff9f1c] font-bold">09:00 - 12:00</span>
+                </div>
+                <h4 class="text-2xl font-bold text-[#0f4c75] mb-3">青岛啤酒博物馆</h4>
+                <p class="text-gray-600 leading-relaxed">
+                  了解青岛啤酒的历史和酿造过程，并可品尝新鲜啤酒。感受百年酿造工艺的魅力。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card rounded-3xl p-8 card-hover border-l-4 border-[#3282b8]">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-16 h-16 bg-[#3282b8] rounded-2xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="utensils" class="w-8 h-8 text-white"></i>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="text-[#ff9f1c] font-bold">12:30 - 16:00</span>
+                </div>
+                <h4 class="text-2xl font-bold text-[#0f4c75] mb-3">青岛啤酒街</h4>
+                <p class="text-gray-600 leading-relaxed">
+                  品尝各种青岛特色小吃和海鲜美食。在热闹的氛围中，畅饮新鲜的原浆啤酒。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧知识卡片 -->
+        <div class="glass-card rounded-3xl p-8 card-hover border-t-4 border-[#ff9f1c]">
+          <h3 class="text-2xl font-bold text-[#0f4c75] mb-6 flex items-center gap-3">
+            <i data-lucide="lightbulb" class="w-6 h-6"></i>
+            青岛啤酒小知识
+          </h3>
+          
+          <div class="space-y-4 mb-6">
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-[#0f4c75] mt-0.5"></i>
+              <p class="text-gray-700">创建于1903年</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-[#0f4c75] mt-0.5"></i>
+              <p class="text-gray-700">中国最早的啤酒品牌之一</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-[#0f4c75] mt-0.5"></i>
+              <p class="text-gray-700">年产量超过800万千升</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="w-5 h-5 text-[#0f4c75] mt-0.5"></i>
+              <p class="text-gray-700">销往全球100多个国家</p>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-[#ff9f1c] to-[#ffb74d] rounded-2xl p-6 text-white text-center">
+            <div class="flex items-center justify-center gap-2 mb-2">
+              <i data-lucide="calendar" class="w-5 h-5"></i>
+              <span class="font-bold text-lg">啤酒节时间</span>
+            </div>
+            <p class="text-white/90">每年8月</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 美食推荐 -->
+  <section id="food" class="py-24 px-4 bg-gradient-to-b from-[#e8f4f8] to-[#fff8f0]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 bg-[#ff9f1c] text-white px-6 py-2 rounded-full mb-6">
+          <i data-lucide="utensils" class="w-5 h-5"></i>
+          <span class="font-medium">美食推荐</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">舌尖上的青岛</h2>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+          鲜美的海鲜、醇香的啤酒、地道的烧烤，让你大快朵颐
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-6 mb-8">
+        <div class="glass-card rounded-3xl p-6 card-hover text-center">
+          <div class="text-6xl mb-4">🦀</div>
+          <h4 class="text-2xl font-bold text-[#d68910] mb-3">海鲜</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            新鲜海鲜是青岛的特色，推荐尝试蛤蜊、螃蟹、大虾。每到海鲜季，满街都是鲜美的海鲜大餐。
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 card-hover text-center">
+          <div class="text-6xl mb-4">🍖</div>
+          <h4 class="text-2xl font-bold text-[#d68910] mb-3">烧烤</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            青岛烧烤非常有名，特别是烤串和烤海鲜。夜晚街边的烧烤摊充满了生活气息。
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 card-hover text-center">
+          <div class="text-6xl mb-4">🍺</div>
+          <h4 class="text-2xl font-bold text-[#d68910] mb-3">啤酒</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            青岛啤酒是必喝的，建议尝试原浆啤酒。清爽的口感是夏天的最佳选择。
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 card-hover text-center">
+          <div class="text-6xl mb-4">🍡</div>
+          <h4 class="text-2xl font-bold text-[#d68910] mb-3">小吃</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            烤鱿鱼、烤海蛎子、煎饼果子等。在啤酒街或台东夜市都能找到地道小吃。
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-[#0f4c75] to-[#3282b8] rounded-3xl p-8 text-white text-center card-hover">
+        <div class="flex items-center justify-center gap-3 mb-3">
+          <i data-lucide="star" class="w-8 h-8 text-[#ff9f1c]"></i>
+          <h3 class="text-3xl font-bold">最佳体验</h3>
+          <i data-lucide="star" class="w-8 h-8 text-[#ff9f1c]"></i>
+        </div>
+        <p class="text-2xl text-white/90">海鲜配啤酒</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 贴士 -->
+  <section id="tips" class="py-24 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 bg-[#0f4c75] text-white px-6 py-2 rounded-full mb-6">
+          <i data-lucide="info" class="w-5 h-5"></i>
+          <span class="font-medium">贴心贴士</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">出行建议</h2>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+          让您的青岛之旅更加顺利愉快
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- 注意事项 -->
+        <div class="glass-card rounded-3xl p-8">
+          <h3 class="text-2xl font-bold text-[#0f4c75] mb-6 flex items-center gap-3 pb-4 border-b-2 border-[#ff9f1c]">
+            <i data-lucide="clipboard-list" class="w-6 h-6"></i>
+            注意事项
+          </h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 bg-white/50 rounded-2xl p-4">
+              <div class="w-10 h-10 bg-[#0f4c75] rounded-xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="calendar" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#0f4c75] mb-1">最佳旅游季节</h4>
+                <p class="text-gray-600 text-sm">5-10月是最佳旅游季节，气候宜人</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 bg-white/50 rounded-2xl p-4">
+              <div class="w-10 h-10 bg-[#ff9f1c] rounded-xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="sun" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#0f4c75] mb-1">防晒防蚊</h4>
+                <p class="text-gray-600 text-sm">海边阳光强烈，注意防晒和防蚊虫</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 bg-white/50 rounded-2xl p-4">
+              <div class="w-10 h-10 bg-[#3282b8] rounded-xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="fish" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#0f4c75] mb-1">海鲜新鲜度</h4>
+                <p class="text-gray-600 text-sm">尝试海鲜时注意新鲜度，选择信誉好的餐厅</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 bg-white/50 rounded-2xl p-4">
+              <div class="w-10 h-10 bg-[#ff9f1c] rounded-xl flex items-center justify-center flex-shrink-0">
+                <i data-lucide="party-popper" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#0f4c75] mb-1">啤酒文化</h4>
+                <p class="text-gray-600 text-sm">青岛啤酒文化浓厚，可体验啤酒节（8月）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 住宿建议 -->
+        <div class="glass-card rounded-3xl p-8">
+          <h3 class="text-2xl font-bold text-[#0f4c75] mb-6 flex items-center gap-3 pb-4 border-b-2 border-[#ff9f1c]">
+            <i data-lucide="home" class="w-6 h-6"></i>
+            住宿建议
+          </h3>
+          
+          <div class="space-y-4">
+            <div class="bg-gradient-to-r from-[#0f4c75] to-[#3282b8] rounded-2xl p-6 text-white card-hover border-l-4 border-[#ff9f1c]">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold">市南区</h4>
+                <i data-lucide="map-pin" class="w-5 h-5 text-[#ff9f1c]"></i>
+              </div>
+              <p class="text-white/90">靠近海边，交通便利，价格稍高</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 card-hover border-l-4 border-[#0f4c75]">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-[#0f4c75]">市北区</h4>
+                <i data-lucide="map-pin" class="w-5 h-5 text-[#ff9f1c]"></i>
+              </div>
+              <p class="text-gray-600">性价比高，生活便利</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 card-hover border-l-4 border-[#3282b8]">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-[#0f4c75]">崂山区</h4>
+                <i data-lucide="map-pin" class="w-5 h-5 text-[#ff9f1c]"></i>
+              </div>
+              <p class="text-gray-600">环境优美，适合度假</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="wave-bg py-16 px-4 text-white relative">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center mb-8">
+        <div class="flex items-center justify-center gap-3 mb-4">
+          <i data-lucide="waves" class="w-10 h-10 text-[#ff9f1c]"></i>
+          <span class="text-3xl font-bold">青岛旅游攻略</span>
+        </div>
+        <p class="text-white/80 text-lg">红瓦绿树，碧海蓝天</p>
+      </div>
+      
+      <div class="flex justify-center gap-8 mb-8">
+        <a href="#day1" class="text-white/80 hover:text-white transition-colors">第一天</a>
+        <a href="#day2" class="text-white/80 hover:text-white transition-colors">第二天</a>
+        <a href="#day3" class="text-white/80 hover:text-white transition-colors">第三天</a>
+        <a href="#food" class="text-white/80 hover:text-white transition-colors">美食</a>
+        <a href="#tips" class="text-white/80 hover:text-white transition-colors">贴士</a>
+      </div>
+
+      <div class="text-center text-white/60 text-sm">
+        <p>© 2024 青岛旅游攻略 | 祝您旅途愉快</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button onclick="window.scrollTo({top:0, behavior:'smooth'})" 
+          class="fixed bottom-8 right-8 w-14 h-14 bg-[#0f4c75] hover:bg-[#3282b8] text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 z-50">
+    <i data-lucide="arrow-up" class="w-6 h-6"></i>
+  </button>
+
+  <script>
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // 滚动时显示/隐藏导航栏
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        nav.classList.add('shadow-lg');
+      } else {
+        nav.classList.remove('shadow-lg');
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // 元素进入视口动画
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section > div').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
