@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeremy 的青岛之旅 - 2026.4.1~4.4</title>
+  <title>Jeremy's Travel Plans</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
@@ -179,9 +179,33 @@
           <h2 class="text-3xl font-bold gradient-text mb-2">旅行日历</h2>
           <p class="text-gray-500">Jeremy 的旅行足迹</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- 青岛卡片 -->
-          <a href="qingdao-travel-guide.html" class="block group col-span-1 md:col-span-3">
+        <!-- 统计栏 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div class="stat-number text-[#0f4c75]">4</div>
+            <p class="text-gray-400 text-sm mt-1">目的地</p>
+          </div>
+          <div>
+            <div class="stat-number text-[#ff9f1c]">4天</div>
+            <p class="text-gray-400 text-sm mt-1">青岛行程</p>
+          </div>
+          <div>
+            <div class="stat-number text-[#3282b8]">6+</div>
+            <p class="text-gray-400 text-sm mt-1">美食推荐</p>
+          </div>
+          <div>
+            <div class="stat-number text-[#c41e3a]">15+</div>
+            <p class="text-gray-400 text-sm mt-1">打卡景点</p>
+          </div>
+        </div>
+
+        <!-- 已确认行程 -->
+        <div class="mt-8 mb-2">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-sm font-medium text-gray-500">已确认行程</span>
+          </div>
+          <a href="qingdao-travel-guide.html" class="block group">
             <div class="glass-card rounded-2xl overflow-hidden" style="background: rgba(255,255,255,0.85);">
               <div class="md:flex">
                 <div class="card-image md:w-2/5 bg-gradient-to-br from-[#0f4c75] via-[#3282b8] to-[#bbe1fa] flex items-center justify-center relative">
@@ -234,10 +258,140 @@
           </a>
         </div>
 
+        <!-- 待定目的地 -->
+        <div class="mt-6">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span class="text-sm font-medium text-gray-500">计划中的目的地</span>
+          </div>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- 北京 -->
+          <div class="glass-card rounded-2xl overflow-hidden cursor-default" style="background: rgba(255,255,255,0.7);">
+            <div class="h-44 bg-gradient-to-br from-[#c41e3a] via-[#e23d3d] to-[#ff6b6b] flex items-center justify-center relative">
+              <div class="absolute inset-0 flex items-center justify-center opacity-[0.07]">
+                <i data-lucide="landmark" class="w-36 h-36 text-white"></i>
+              </div>
+              <div class="relative z-10 text-center text-white px-6">
+                <div class="text-6xl mb-2">🏯</div>
+                <h3 class="font-display text-3xl font-bold">北京</h3>
+                <p class="text-white/60 mt-1 text-xs">Beijing, China</p>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="tag bg-[#c41e3a]/10 text-[#c41e3a]">
+                  <i data-lucide="clock" class="w-3 h-3"></i>
+                  待定
+                </span>
+                <span class="tag bg-gray-100 text-gray-500">
+                  <i data-lucide="graduation-cap" class="w-3 h-3"></i>
+                  文化·教育
+                </span>
+              </div>
+              <h4 class="text-lg font-bold text-gray-800 mb-2">北京文化之旅</h4>
+              <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                故宫博物院、清华大学、北京大学…… 感受千年古都的历史底蕴与学术氛围。
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  🏛️ 故宫
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  🎓 清华大学
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  🎓 北京大学
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 武汉 -->
+          <div class="glass-card rounded-2xl overflow-hidden cursor-default" style="background: rgba(255,255,255,0.7);">
+            <div class="h-44 bg-gradient-to-br from-[#e9c46a] via-[#f4a261] to-[#e76f51] flex items-center justify-center relative">
+              <div class="absolute inset-0 flex items-center justify-center opacity-[0.07]">
+                <i data-lucide="building" class="w-36 h-36 text-white"></i>
+              </div>
+              <div class="relative z-10 text-center text-white px-6">
+                <div class="text-6xl mb-2">🏯</div>
+                <h3 class="font-display text-3xl font-bold">武汉</h3>
+                <p class="text-white/60 mt-1 text-xs">Wuhan, China</p>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="tag bg-[#e76f51]/10 text-[#e76f51]">
+                  <i data-lucide="clock" class="w-3 h-3"></i>
+                  待定
+                </span>
+                <span class="tag bg-gray-100 text-gray-500">
+                  <i data-lucide="history" class="w-3 h-3"></i>
+                  历史·名楼
+                </span>
+              </div>
+              <h4 class="text-lg font-bold text-gray-800 mb-2">武汉·岳阳名胜之旅</h4>
+              <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                从武汉出发，前往岳阳楼——"先天下之忧而忧"，登楼远眺洞庭湖，领略千古名篇中的壮阔情怀。
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  🏯 岳阳楼（湖南岳阳）
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  🌊 洞庭湖
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 平潭 -->
+          <div class="glass-card rounded-2xl overflow-hidden cursor-default" style="background: rgba(255,255,255,0.7);">
+            <div class="h-44 bg-gradient-to-br from-[#06d6a0] via-[#1b9aaa] to-[#5e60ce] flex items-center justify-center relative">
+              <div class="absolute inset-0 flex items-center justify-center opacity-[0.07]">
+                <i data-lucide="palmtree" class="w-36 h-36 text-white"></i>
+              </div>
+              <div class="relative z-10 text-center text-white px-6">
+                <div class="text-6xl mb-2">🌊</div>
+                <h3 class="font-display text-3xl font-bold">平潭</h3>
+                <p class="text-white/60 mt-1 text-xs">Pingtan, China</p>
+              </div>
+            </div>
+            <div class="p-5">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="tag bg-[#5e60ce]/10 text-[#5e60ce]">
+                  <i data-lucide="clock" class="w-3 h-3"></i>
+                  待定
+                </span>
+                <span class="tag bg-gray-100 text-gray-500">
+                  <i data-lucide="sparkles" class="w-3 h-3"></i>
+                  海岛·蓝泪
+                </span>
+              </div>
+              <h4 class="text-lg font-bold text-gray-800 mb-2">平潭海岛探秘</h4>
+              <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                追逐"蓝眼泪"的梦幻海岛，风车田、石牌洋、龙王头…… 福建最浪漫的海岛目的地。
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  ✨ 蓝眼泪
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  🌬️ 风车田
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs bg-gray-50 rounded-lg px-2.5 py-1 text-gray-500">
+                  🪨 石牌洋
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
         <!-- 更多占位 -->
         <div class="mt-6 border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center hover:border-[#3282b8] transition-colors">
           <i data-lucide="plus-circle" class="w-10 h-10 text-gray-400 mx-auto mb-3"></i>
-          <p class="text-gray-400 text-sm font-medium">下一个目的地，正在计划中...</p>
+          <p class="text-gray-400 text-sm font-medium">更多目的地，敬请期待...</p>
         </div>
       </div>
     </div>
